@@ -97,6 +97,11 @@ def main():
     app_theme = os.path.join(HERE, "..", "..", "exame", "src", "theme")
     if os.path.isdir(app_theme):
         outputs.append((os.path.join(app_theme, "tokens.ts"), build_ts(t)))
+    # o painel Next.js também só lê de dentro da própria pasta
+    painel = os.path.join(HERE, "..", "..", "painel", "src", "estilo")
+    if os.path.isdir(painel):
+        outputs.append((os.path.join(painel, "tokens.css"), build_css(t)))
+        outputs.append((os.path.join(painel, "tailwind.preset.js"), build_tailwind(t)))
     for path, text in outputs:
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(text)

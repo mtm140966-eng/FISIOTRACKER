@@ -1,0 +1,7 @@
+@import '../estilo/tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); }
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }

@@ -1,5 +1,5 @@
 feature,area,priority,original,clone,notes
-Abrir sempre sem fechar (inclusive offline),estabilidade,must,no,partial,principal reclamação do original; conteúdo embutido no app; abre sem rede. Falta o pacote baixado e trocado com segurança (/replica-backend)
+Abrir sempre sem fechar (inclusive offline),estabilidade,must,no,yes,principal reclamação do original; abre com o pacote guardado ou o embutido; pacote novo só entra depois de conferir sha256 e formato (testado com pacote adulterado)
 Navegar pelas regiões no mapa do corpo,navegação,must,yes,yes,figura própria; S03; figura provisória feita do zero
 Lista A–Z de todos os testes,navegação,must,yes,no,ainda não há tela A–Z; a busca cobre parte
 Busca por nome e epônimo com tolerância a grafia e acento,busca,must,yes,yes,ex.: Neer/Neer's; Lachman/Lachmann; S05; 7 testes automáticos
@@ -8,18 +8,18 @@ Ficha do teste: posição; execução; o que é positivo,conteúdo,must,yes,yes,
 Vídeo de cada teste com áudio,conteúdo,must,partial,no,original não tem áudio no streaming; S07 só com estado vazio; player entra com os vídeos
 Propriedades diagnósticas: Sens; Esp; LR+; LR−; confiabilidade,evidência,must,yes,yes,levantadas dos artigos originais; S08; LR calculada marcada; selo por LR; 11 testes automáticos
 Referências com link para PubMed/DOI,evidência,must,yes,yes,S09
-Favoritos,navegação,must,yes,partial,"S10; só na memória, some ao fechar o app"
-Uso offline do texto e das propriedades,offline,must,partial,partial,pacote embutido; falta atualização baixada
+Favoritos,navegação,must,yes,yes,S10; gravados no aparelho; sobrevivem a fechar o app
+Uso offline do texto e das propriedades,offline,must,partial,yes,pacote guardado no aparelho
 Funcionar em celular Android e iPhone,plataforma,must,yes,partial,"código Expo único; conferido só na versão web, falta abrir em aparelho"
-Painel para você cadastrar e editar testes sem programar,conteúdo,must,no,no,necessário porque o conteúdo é seu
+Painel para você cadastrar e editar testes sem programar,conteúdo,must,no,partial,"necessário porque o conteúdo é seu; painel/ com login, testes, estudos com PubMed e publicar; falta upload de vídeo e teste com o Supabase de verdade"
 Busca por suspeita diagnóstica (categoria),navegação,should,yes,partial,a busca acha pela suspeita; falta a tela de categorias
 Vídeos offline incluídos sem cobrança extra,offline,should,partial,no,original cobra à parte
 Gerenciar downloads por região,offline,should,yes,no,
-Favoritos sincronizados entre aparelhos,conta,should,no,no,exige login
+Favoritos sincronizados entre aparelhos,conta,should,no,no,exige login; tabela e regras prontas e testadas; falta login no app
 Calculadora de probabilidade pós-teste a partir da LR,evidência,should,no,no,usa a probabilidade pré-teste informada pelo clínico; cálculo pronto e testado em src/lib; falta a tela
 Interface limpa e com fonte grande,design,should,no,yes,reclamação do original; tokens do /replica-design; contraste AA
 Indicar quando os estudos discordam,evidência,should,unknown,yes,S08
-Atualizações de conteúdo sem atualizar o app,conteúdo,should,unknown,no,
+Atualizações de conteúdo sem atualizar o app,conteúdo,should,unknown,yes,publicar_pacote() + sincronia ao abrir o app
 Tema escuro,design,should,unknown,partial,segue o sistema; falta a opção manual em Mais
 Modo quiz/revisão,estudo,could,no,no,reclamação do original; útil para residentes
 Sequência de exame por região (roteiro de consulta),clínico,could,no,no,

@@ -13,7 +13,7 @@ Duas peças: o **app** (Android e iPhone), que o clínico usa, e o **painel**
 | busca | local, com Fuse.js | 400 testes cabem no aparelho; busca instantânea e offline, tolerante a acento e grafia |
 | painel | Next.js (App Router) + TypeScript + Tailwind | formulário para escrever testes sem programar |
 | banco | Postgres no Supabase | você já tem o Supabase conectado; um banco só |
-| acesso | RLS do Postgres (`replica/schema.sql`) | a regra fica no banco, vale para o app e para o painel |
+| acesso | RLS do Postgres (`supabase/migrations/`) | a regra fica no banco, vale para o app e para o painel |
 | login | Supabase Auth, link mágico por e-mail | editores entram no painel; no app o login é opcional (só para sincronizar favoritos) |
 | arquivos | Supabase Storage: bucket `videos` | vídeos saem pelo CDN do Supabase; o pacote de conteúdo fica numa tabela (cabe folgado) |
 | referências | API pública do PubMed (NCBI E-utilities) | preenche a citação a partir do PMID |
