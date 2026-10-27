@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
+import { sincronizarAgora } from '../data/conteudo';
 import { FavoritosProvider } from '../data/favoritos';
 import { fonte, useTema } from '../theme';
 
@@ -17,9 +18,27 @@ function useAnelDeFocoNaWeb(cor: string) {
   }, [cor]);
 }
 
+const INTERVALO_SINCRONIA_MS = 30 * 60 * 1000;
+
+// Procura conteúdo novo ao abrir o app e ao voltar para ele (no máximo a cada 30 min).
+function useSincroniaDoConteudo() {
+  useEffect(() => {
+    let ultima = 0;
+    const tentar = () => {
+      if (Date.now() - ultima < INTERVALO_SINCRONIA_MS) return;
+      ultima = Date.now();
+      sincronizarAgora();
+    };
+    tentar();
+    const assinatura = AppState.addEventListener('change', (s) => s === 'active' && tentar());
+    return () => assinatura.remove();
+  }, []);
+}
+
 export default function Raiz() {
   const { esquema, c } = useTema();
   useAnelDeFocoNaWeb(c.focus);
+  useSincroniaDoConteudo();
   const base = esquema === 'dark' ? DarkTheme : DefaultTheme;
   const tema = {
     ...base,

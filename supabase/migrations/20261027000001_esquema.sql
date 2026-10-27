@@ -6,9 +6,10 @@
 --   * favoritos: cada usuário só vê e mexe nos seus
 -- Tudo em UTC (timestamptz).
 
-create extension if not exists pgcrypto;
-create extension if not exists unaccent;
-create extension if not exists pg_trgm;
+-- No Supabase as extensões moram no schema "extensions".
+create schema if not exists extensions;
+create extension if not exists pgcrypto with schema extensions;
+create extension if not exists pg_trgm with schema extensions;
 
 -- updated_at automático --------------------------------------------------
 
@@ -104,7 +105,7 @@ create index on testes (regiao_id, status);
 create index on testes (status, updated_at);
 create index on testes (autor_id);
 -- busca no painel (o app busca localmente, no aparelho)
-create index testes_nome_trgm on testes using gin (nome gin_trgm_ops);
+create index testes_nome_trgm on testes using gin (nome extensions.gin_trgm_ops);
 create trigger testes_updated_at before update on testes
   for each row execute function set_updated_at();
 
@@ -184,14 +185,15 @@ create trigger videos_updated_at before update on videos
   for each row execute function set_updated_at();
 
 -- Pacotes de conteúdo publicados (offline) --------------------------------
--- Ao publicar, o painel gera um JSON com todo o conteúdo publicado e grava
--- no Storage. O app baixa só quando a versão muda.
+-- publicar_pacote() junta todo o conteúdo publicado num JSON e grava aqui,
+-- já como texto, com o sha256 desse texto. O app baixa o texto, confere o
+-- sha256 e só então troca o conteúdo do aparelho.
 
 create table pacotes (
   id uuid primary key default gen_random_uuid(),
   versao int not null unique check (versao > 0),
-  caminho text not null,                     -- 'pacotes/v12.json'
-  sha256 text not null,
+  conteudo text not null,
+  sha256 text not null check (sha256 ~ '^[0-9a-f]{64}$'),
   total_testes int not null check (total_testes >= 0),
   publicado_por uuid references perfis(id) on delete set null,
   created_at timestamptz not null default now()
@@ -247,7 +249,7 @@ create policy categorias_escrever on categorias for all using (eh_editor()) with
 create policy referencias_ler on referencias for select using (true);
 create policy referencias_escrever on referencias for all using (eh_editor()) with check (eh_editor());
 create policy pacotes_ler on pacotes for select using (true);
-create policy pacotes_escrever on pacotes for insert with check (eh_editor());
+-- pacotes só são criados por publicar_pacote()
 
 -- testes e o que pende deles: público vê só o publicado
 create policy testes_ler on testes for select using (status = 'publicado' or eh_editor());

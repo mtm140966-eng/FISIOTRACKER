@@ -15,7 +15,7 @@ Duas peças: o **app** (Android e iPhone), que o clínico usa, e o **painel**
 | banco | Postgres no Supabase | você já tem o Supabase conectado; um banco só |
 | acesso | RLS do Postgres (`replica/schema.sql`) | a regra fica no banco, vale para o app e para o painel |
 | login | Supabase Auth, link mágico por e-mail | editores entram no painel; no app o login é opcional (só para sincronizar favoritos) |
-| arquivos | Supabase Storage: bucket `videos` e bucket `pacotes` | vídeos e o pacote de conteúdo saem pelo CDN do Supabase |
+| arquivos | Supabase Storage: bucket `videos` | vídeos saem pelo CDN do Supabase; o pacote de conteúdo fica numa tabela (cabe folgado) |
 | referências | API pública do PubMed (NCBI E-utilities) | preenche a citação a partir do PMID |
 | hospedagem do painel | Vercel | você já tem o Vercel conectado |
 | pagamentos | nenhum na v1 | se for vender dentro do app, Apple e Google exigem a compra pela loja (RevenueCat); decisão no `/replica-launch` |
@@ -29,8 +29,8 @@ simples (só e-mail de quem cria conta).
 
 ```
 Painel: você escreve o teste -> "revisão" -> "publicado"
-        botão "Publicar pacote" -> gera pacotes/vN.json (todo o conteúdo publicado)
-                                -> grava no Storage + linha em `pacotes`
+        botão "Publicar pacote" -> publicar_pacote() no banco: monta o JSON de todo
+                                   o conteúdo publicado e grava texto + sha256 em `pacotes`
 App:    ao abrir, já tem um pacote embutido (abre mesmo sem internet)
         com internet, consulta a última versão em `pacotes`
         se for nova: baixa, confere o sha256, troca de uma vez
@@ -40,7 +40,7 @@ Vídeos: baixados sob demanda (streaming) ou por região (offline), do bucket `v
 
 ## Banco de dados
 
-Tabelas: 10. Acesso: RLS. Arquivo: `replica/schema.sql`.
+Tabelas: 10. Acesso: RLS. Arquivos: `supabase/migrations/` (testes em `supabase/testes/`).
 
 | tabela | o que guarda |
 | --- | --- |
@@ -52,7 +52,7 @@ Tabelas: 10. Acesso: RLS. Arquivo: `replica/schema.sql`.
 | referencias | citação, PMID, DOI |
 | propriedades | sensibilidade, especificidade (com IC 95%), LR+, LR−, confiabilidade; uma linha por estudo, sempre com referência |
 | videos | caminho no Storage, duração, tamanho, se tem áudio |
-| pacotes | versões publicadas do conteúdo para o app |
+| pacotes | versões publicadas do conteúdo para o app (texto JSON + sha256) |
 | favoritos | favoritos sincronizados de quem tem conta |
 
 Regras garantidas pelo banco (testadas num Postgres local, 12 de 12 passaram):
@@ -72,8 +72,8 @@ são as do Supabase (PostgREST e Storage) mais as ações do painel.
 
 | método e caminho | faz | quem | entrada | saída | fluxo |
 | --- | --- | --- | --- | --- | --- |
-| GET `rest/v1/pacotes?order=versao.desc&limit=1` | última versão do conteúdo | qualquer um | — | versão, caminho, sha256 | F01–F05 |
-| GET `storage/v1/object/public/pacotes/vN.json` | baixa o conteúdo | qualquer um | versão | JSON | F01–F05 |
+| GET `rest/v1/ultimo_pacote?select=versao,sha256` | última versão do conteúdo | qualquer um | — | versão, sha256 | F01–F05 |
+| GET `rest/v1/pacotes?select=conteudo,sha256&versao=eq.N` | baixa o conteúdo | qualquer um | versão | texto JSON + sha256 | F01–F05 |
 | GET `storage/v1/object/public/videos/{caminho}` | vídeo (streaming ou download) | qualquer um | caminho | mp4 | F04, F07 |
 | GET `rest/v1/favoritos` | lista favoritos | dono | — | testes | F06 |
 | POST `rest/v1/favoritos` | favorita | dono | teste_id | ok | F06 |
@@ -91,7 +91,7 @@ são as do Supabase (PostgREST e Storage) mais as ações do painel.
 | `salvarReferencia` | grava referência | editor | citação, PMID, DOI | referência |
 | `urlUploadVideo` | gera link assinado para subir o vídeo | editor | teste_id, arquivo | URL de upload |
 | `salvarVideo` | registra o vídeo enviado | editor | caminho, duração, tamanho | vídeo |
-| `publicarPacote` | gera o JSON, grava no Storage e cria a versão | editor | — | versão N |
+| `publicarPacote` | chama `publicar_pacote()` no banco | editor | — | versão N |
 
 Rotas: 15 (7 do app, 8 do painel). Webhooks: nenhum na v1. Tarefas agendadas: nenhuma na v1.
 
