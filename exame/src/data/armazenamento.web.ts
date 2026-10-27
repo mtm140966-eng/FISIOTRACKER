@@ -16,3 +16,12 @@ export async function gravarTexto(nome: string, texto: string): Promise<void> {
     // sem armazenamento: o app segue com o conteúdo embutido
   }
 }
+
+// Na web, outra aba pode gravar o mesmo arquivo: avisa quando isso acontece.
+export function observar(nome: string, aoMudar: (texto: string | null) => void): () => void {
+  const ouvir = (e: StorageEvent) => {
+    if (e.key === nome) aoMudar(e.newValue);
+  };
+  window.addEventListener('storage', ouvir);
+  return () => window.removeEventListener('storage', ouvir);
+}

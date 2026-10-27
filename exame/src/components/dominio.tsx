@@ -17,7 +17,7 @@ export function SeloEvidencia({ nivel, uso, curto }: { nivel: NivelEvidencia; us
   const rotulo = rotuloNivel(nivel, uso);
   const texto = curto ? rotuloNivel(nivel, null).replace('Evidência ', '').replace(/^./, (l) => l.toUpperCase()) : rotulo;
   return (
-    <View accessibilityLabel={rotulo} style={{ alignSelf: 'flex-start', height: 24, paddingHorizontal: espaco(2) + 2, borderRadius: raio.pill, justifyContent: 'center', backgroundColor: c[`${tom}-soft`] }}>
+    <View style={{ alignSelf: 'flex-start', height: 24, paddingHorizontal: espaco(2) + 2, borderRadius: raio.pill, justifyContent: 'center', backgroundColor: c[`${tom}-soft`] }}>
       <Text style={[fonte('xs'), { color: c[tom], fontWeight: '600' }]}>{texto}</Text>
     </View>
   );
@@ -31,7 +31,7 @@ export function ItemTeste({ slug, nome, subtitulo, nivel, uso, favorito, aoFavor
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', minHeight: 64, borderBottomWidth: 1, borderColor: c.border, paddingLeft: espaco(4), paddingRight: espaco(1) }}>
       <Link href={{ pathname: '/teste/[slug]', params: { slug } }} asChild>
-        <Pressable accessibilityRole="link" accessibilityLabel={`${nome}. ${subtitulo}. ${rotuloNivel(nivel, uso)}`} style={{ flex: 1, paddingVertical: espaco(2), gap: 2 }}>
+        <Pressable accessibilityRole="link" style={{ flex: 1, paddingVertical: espaco(2), gap: 2 }}>
           <Texto style={{ fontWeight: '600' }} numberOfLines={2}>{nome}</Texto>
           <View style={{ flexDirection: 'row', gap: espaco(2), alignItems: 'center', flexWrap: 'wrap' }}>
             {subtitulo ? <Texto tipo="sm" mudo numberOfLines={1} style={{ flexShrink: 1 }}>{subtitulo}</Texto> : null}
@@ -59,7 +59,6 @@ export function ItemRegiao({ regiao, total }: { regiao: Regiao; total: number })
     <Link href={{ pathname: '/regiao/[slug]', params: { slug: regiao.slug } }} asChild>
       <Pressable
         accessibilityRole="link"
-        accessibilityLabel={`${regiao.nome}, ${sufixo}`}
         style={{ flexDirection: 'row', alignItems: 'center', minHeight: 56, paddingHorizontal: espaco(4), borderBottomWidth: 1, borderColor: c.border }}
       >
         <Texto style={{ flex: 1, fontWeight: '600' }}>{regiao.nome}</Texto>
@@ -73,7 +72,7 @@ export function ItemRegiao({ regiao, total }: { regiao: Regiao; total: number })
 // Figura do corpo desenhada do zero, provisória até o /replica-brand.
 // Cada área tem as coordenadas de um lado; regiões pares são espelhadas.
 const AREAS: Record<string, { x: number; y: number; w: number; h: number; par?: boolean }[]> = {
-  cervical: [{ x: 74, y: 44, w: 22, h: 16 }],
+  cervical: [{ x: 74, y: 42, w: 22, h: 18 }],
   ombro: [{ x: 38, y: 60, w: 30, h: 26, par: true }],
   cotovelo: [{ x: 30, y: 90, w: 18, h: 60, par: true }],
   punho: [{ x: 24, y: 154, w: 22, h: 24, par: true }],
@@ -82,8 +81,12 @@ const AREAS: Record<string, { x: number; y: number; w: number; h: number; par?: 
   joelho: [{ x: 64, y: 160, w: 19, h: 44, par: true }],
   tornozelo: [{ x: 64, y: 206, w: 19, h: 40, par: true }],
 };
-const LARGURA = 170;
-const ALTURA = 260;
+// Desenho em 170 × 260 ampliado 1,4×: a menor área (pescoço, 22 × 18) vira 31 × 25 px,
+// acima do mínimo de 24 px para toque (WCAG 2.5.8).
+const ESCALA = 1.4;
+const LARGURA_BASE = 170;
+const LARGURA = LARGURA_BASE * ESCALA;
+const ALTURA = 260 * ESCALA;
 
 type AreaDesenhada = { r: Regiao; a: (typeof AREAS)[string][number]; x: number; lado: string };
 
@@ -92,14 +95,14 @@ export function MapaCorpo({ regioes, selecionada, aoEscolher }: {
 }) {
   const { c } = useTema();
   const areas: AreaDesenhada[] = regioes.flatMap((r) => (AREAS[r.areaFigura] ?? []).flatMap((a): AreaDesenhada[] => {
-    const lados = a.par ? [a.x, LARGURA - a.x - a.w] : [a.x];
+    const lados = a.par ? [a.x, LARGURA_BASE - a.x - a.w] : [a.x];
     return lados.map((x, i) => ({ r, a, x, lado: lados.length > 1 ? (i === 0 ? ' direito' : ' esquerdo') : '' }));
   }));
   // Formas simples desenhadas com caixas: cada área é o próprio botão.
   return (
     <View accessibilityLabel="Mapa do corpo, vista de frente. As mesmas regiões estão na lista abaixo." style={{ alignItems: 'center', paddingVertical: espaco(2) }}>
       <View style={{ width: LARGURA, height: ALTURA }}>
-        <View accessible={false} style={{ position: 'absolute', left: 67, top: 6, width: 36, height: 36, borderRadius: 18, backgroundColor: c.surface, borderWidth: 1.5, borderColor: c['border-input'] }} />
+        <View accessible={false} style={{ position: 'absolute', left: 67 * ESCALA, top: 6 * ESCALA, width: 36 * ESCALA, height: 36 * ESCALA, borderRadius: 18 * ESCALA, backgroundColor: c.surface, borderWidth: 1.5, borderColor: c['border-input'] }} />
         {areas.map(({ r, a, x, lado }) => {
           const ativa = r.slug === selecionada;
           return (
@@ -109,7 +112,7 @@ export function MapaCorpo({ regioes, selecionada, aoEscolher }: {
               accessibilityLabel={`${r.nome}${lado}`}
               onPress={() => aoEscolher(r.slug)}
               style={({ pressed }) => ({
-                position: 'absolute', left: x, top: a.y, width: a.w, height: a.h, borderRadius: 8,
+                position: 'absolute', left: x * ESCALA, top: a.y * ESCALA, width: a.w * ESCALA, height: a.h * ESCALA, borderRadius: 8 * ESCALA,
                 backgroundColor: ativa || pressed ? c['accent-soft'] : c.surface,
                 borderWidth: ativa ? 2.5 : 1.5,
                 borderColor: ativa || pressed ? c.accent : c['border-input'],

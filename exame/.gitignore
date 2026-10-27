@@ -43,3 +43,6 @@ yarn-error.*
 # variáveis de ambiente (o exemplo fica no git)
 .env*
 !.env.example
+e2e-resultado.json
+test-results/
+playwright-report/

@@ -20,3 +20,8 @@ export async function gravarTexto(nome: string, texto: string): Promise<void> {
   await temporario.write(texto);
   await temporario.move(new File(Paths.document, nome), { overwrite: true });
 }
+
+// No celular só existe uma instância do app: nada a observar.
+export function observar(_nome: string, _aoMudar: (texto: string | null) => void): () => void {
+  return () => {};
+}

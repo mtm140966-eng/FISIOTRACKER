@@ -103,8 +103,8 @@ export function AvisoOffline({ texto }: { texto: string }) {
 export function Carregando() {
   const { c } = useTema();
   return (
-    <View accessibilityLabel="Carregando" style={{ padding: espaco(6), alignItems: 'center' }}>
-      <ActivityIndicator color={c.accent} />
+    <View style={{ padding: espaco(6), alignItems: 'center' }}>
+      <ActivityIndicator color={c.accent} accessibilityLabel="Carregando" />
     </View>
   );
 }

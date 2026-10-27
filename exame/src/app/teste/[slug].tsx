@@ -58,7 +58,7 @@ export default function FichaDoTeste() {
               }}
             />
             <Abas abas={ABAS} ativa={aba} aoMudar={setAba} />
-            <ScrollView contentContainerStyle={{ padding: espaco(4), paddingBottom: espaco(7), width: '100%', maxWidth: LARGURA_LEITURA, alignSelf: 'center' }}>
+            <ScrollView tabIndex={0} accessibilityLabel={`Conteúdo da aba ${ABAS.find((a) => a.id === aba)?.rotulo ?? ''}`} contentContainerStyle={{ padding: espaco(4), paddingBottom: espaco(7), width: '100%', maxWidth: LARGURA_LEITURA, alignSelf: 'center' }}>
               {teste.demonstracao ? (
                 <View style={{ marginBottom: espaco(3) }}>
                   <Aviso texto="Teste de demonstração: todos os números e referências são fictícios." />
