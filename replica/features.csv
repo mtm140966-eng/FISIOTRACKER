@@ -1,0 +1,33 @@
+feature,area,priority,original,clone,notes
+Abrir sempre sem fechar (inclusive offline),estabilidade,must,no,no,principal reclamação do original
+Navegar pelas regiões no mapa do corpo,navegação,must,yes,no,figura própria
+Lista A–Z de todos os testes,navegação,must,yes,no,
+Busca por nome e epônimo com tolerância a grafia e acento,busca,must,yes,no,ex.: Neer/Neer's; Lachman/Lachmann
+Busca e nomes em português e em inglês,busca,must,no,no,diferencial para o Brasil
+Ficha do teste: posição; execução; o que é positivo,conteúdo,must,yes,no,texto próprio
+Vídeo de cada teste com áudio,conteúdo,must,partial,no,original não tem áudio no streaming
+Propriedades diagnósticas: Sens; Esp; LR+; LR−; confiabilidade,evidência,must,yes,no,levantadas dos artigos originais
+Referências com link para PubMed/DOI,evidência,must,yes,no,
+Favoritos,navegação,must,yes,no,
+Uso offline do texto e das propriedades,offline,must,partial,no,
+Funcionar em celular Android e iPhone,plataforma,must,yes,no,
+Painel para você cadastrar e editar testes sem programar,conteúdo,must,no,no,necessário porque o conteúdo é seu
+Busca por suspeita diagnóstica (categoria),navegação,should,yes,no,
+Vídeos offline incluídos sem cobrança extra,offline,should,partial,no,original cobra à parte
+Gerenciar downloads por região,offline,should,yes,no,
+Favoritos sincronizados entre aparelhos,conta,should,no,no,exige login
+Calculadora de probabilidade pós-teste a partir da LR,evidência,should,no,no,usa a probabilidade pré-teste informada pelo clínico
+Interface limpa e com fonte grande,design,should,no,no,reclamação do original
+Indicar quando os estudos discordam,evidência,should,unknown,no,
+Atualizações de conteúdo sem atualizar o app,conteúdo,should,unknown,no,
+Tema escuro,design,should,unknown,no,
+Modo quiz/revisão,estudo,could,no,no,reclamação do original; útil para residentes
+Sequência de exame por região (roteiro de consulta),clínico,could,no,no,
+Compartilhar o teste com um colega,compartilhamento,could,unknown,no,
+Versão para Mac/computador,plataforma,could,yes,no,
+Ligação com o FISIOTRACKER,integração,could,no,no,
+Textos e vídeos do CORE,conteúdo,must,yes,skip,pertencem a eles; conteúdo próprio
+Tabela de propriedades compilada pelo CORE,evidência,must,yes,skip,refazer a partir dos artigos originais
+Nome; logo e figura do corpo do CORE,marca,must,yes,skip,marca própria no /replica-brand
+Avaliações e base de usuários do CORE,rede,could,yes,skip,não é copiável
+Compra no app de pacote de vídeos,monetização,could,yes,skip,decisão de preço fica para o /replica-launch
