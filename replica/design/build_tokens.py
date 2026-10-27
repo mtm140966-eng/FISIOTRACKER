@@ -90,11 +90,17 @@ def build_tailwind(t):
 def main():
     with open(os.path.join(HERE, "tokens.json"), encoding="utf-8") as fh:
         t = json.load(fh)
-    for name, text in (("tokens.css", build_css(t)), ("tokens.ts", build_ts(t)),
-                       ("tailwind.preset.js", build_tailwind(t))):
-        with open(os.path.join(HERE, name), "w", encoding="utf-8") as fh:
+    outputs = [(os.path.join(HERE, "tokens.css"), build_css(t)),
+               (os.path.join(HERE, "tokens.ts"), build_ts(t)),
+               (os.path.join(HERE, "tailwind.preset.js"), build_tailwind(t))]
+    # o app Expo não importa de fora da sua pasta, então recebe uma cópia
+    app_theme = os.path.join(HERE, "..", "..", "exame", "src", "theme")
+    if os.path.isdir(app_theme):
+        outputs.append((os.path.join(app_theme, "tokens.ts"), build_ts(t)))
+    for path, text in outputs:
+        with open(path, "w", encoding="utf-8") as fh:
             fh.write(text)
-        print("escrito", name)
+        print("escrito", os.path.relpath(path, os.path.join(HERE, "..", "..")))
 
 
 if __name__ == "__main__":

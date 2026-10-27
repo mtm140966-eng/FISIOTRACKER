@@ -1,0 +1,132 @@
+// Gerado por build_tokens.py a partir de tokens.json. Não editar à mão.
+
+export const tokens = {
+  "color": {
+    "light": {
+      "bg": "#ffffff",
+      "surface": "#f4f6f7",
+      "surface-raised": "#ffffff",
+      "border": "#dfe4e7",
+      "border-input": "#77828c",
+      "text": "#12181d",
+      "text-muted": "#55606a",
+      "accent": "#0a6b71",
+      "accent-hover": "#085a5f",
+      "on-accent": "#ffffff",
+      "accent-soft": "#e2f1f1",
+      "focus": "#0a6b71",
+      "danger": "#b42318",
+      "danger-soft": "#fdecea",
+      "success": "#1a7444",
+      "warning": "#875700",
+      "warning-soft": "#fbf0da",
+      "evidence-strong": "#1a7444",
+      "evidence-strong-soft": "#e4f3ea",
+      "evidence-moderate": "#875700",
+      "evidence-moderate-soft": "#fbf0da",
+      "evidence-weak": "#55606a",
+      "evidence-weak-soft": "#edf0f2",
+      "favorite": "#9a5b00"
+    },
+    "dark": {
+      "bg": "#0e1317",
+      "surface": "#151c21",
+      "surface-raised": "#1b242a",
+      "border": "#2a343b",
+      "border-input": "#717d87",
+      "text": "#e7ecef",
+      "text-muted": "#9ba7b0",
+      "accent": "#55c3c8",
+      "accent-hover": "#74d0d4",
+      "on-accent": "#06282a",
+      "accent-soft": "#123638",
+      "focus": "#55c3c8",
+      "danger": "#ff8b80",
+      "danger-soft": "#3a1714",
+      "success": "#5fcf8e",
+      "warning": "#efbd5d",
+      "warning-soft": "#352a12",
+      "evidence-strong": "#5fcf8e",
+      "evidence-strong-soft": "#15301f",
+      "evidence-moderate": "#efbd5d",
+      "evidence-moderate-soft": "#352a12",
+      "evidence-weak": "#9ba7b0",
+      "evidence-weak-soft": "#222b31",
+      "favorite": "#f2b44a"
+    }
+  },
+  "font": {
+    "sans": "Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+    "mono": "ui-monospace, SFMono-Regular, Menlo, monospace"
+  },
+  "type": {
+    "xs": {
+      "size": 12,
+      "line": 16,
+      "weight": 500
+    },
+    "sm": {
+      "size": 14,
+      "line": 20,
+      "weight": 400
+    },
+    "base": {
+      "size": 16,
+      "line": 24,
+      "weight": 400
+    },
+    "lg": {
+      "size": 18,
+      "line": 26,
+      "weight": 600
+    },
+    "xl": {
+      "size": 22,
+      "line": 28,
+      "weight": 700
+    },
+    "display": {
+      "size": 30,
+      "line": 36,
+      "weight": 700
+    }
+  },
+  "space": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "radius": {
+    "sm": 6,
+    "md": 10,
+    "lg": 14,
+    "pill": 999
+  },
+  "shadow": {
+    "card": "0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.10)",
+    "pop": "0 12px 32px rgba(16,24,40,.18)"
+  },
+  "motion": {
+    "fast": "120ms",
+    "base": "200ms",
+    "ease": "cubic-bezier(.2,.8,.2,1)"
+  },
+  "layout": {
+    "touch-min": 48,
+    "app-header": 56,
+    "app-tabbar": 64,
+    "app-gutter": 16,
+    "panel-max": 1120,
+    "panel-sidebar": 240,
+    "bp-sm": 640,
+    "bp-lg": 1024
+  }
+} as const;
+
+export type ThemeName = keyof typeof tokens.color;

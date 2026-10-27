@@ -1,0 +1,59 @@
+{
+  "versao": 1,
+  "geradoEm": "2026-10-27T00:00:00Z",
+  "regioes": [
+    { "slug": "coluna-cervical", "nome": "Coluna cervical", "nomeEn": "Cervical spine", "ordem": 1, "areaFigura": "cervical" },
+    { "slug": "ombro", "nome": "Ombro", "nomeEn": "Shoulder", "ordem": 2, "areaFigura": "ombro" },
+    { "slug": "cotovelo", "nome": "Cotovelo", "nomeEn": "Elbow", "ordem": 3, "areaFigura": "cotovelo" },
+    { "slug": "punho-mao", "nome": "Punho e mão", "nomeEn": "Wrist and hand", "ordem": 4, "areaFigura": "punho" },
+    { "slug": "coluna-lombar", "nome": "Coluna lombar e pelve", "nomeEn": "Lumbar spine and pelvis", "ordem": 5, "areaFigura": "lombar" },
+    { "slug": "quadril", "nome": "Quadril", "nomeEn": "Hip", "ordem": 6, "areaFigura": "quadril" },
+    { "slug": "joelho", "nome": "Joelho", "nomeEn": "Knee", "ordem": 7, "areaFigura": "joelho" },
+    { "slug": "tornozelo-pe", "nome": "Tornozelo e pé", "nomeEn": "Ankle and foot", "ordem": 8, "areaFigura": "tornozelo" }
+  ],
+  "testes": [
+    {
+      "slug": "teste-de-neer",
+      "regiao": "ombro",
+      "nome": "Teste de Neer",
+      "nomeEn": "Neer's test",
+      "sinonimos": ["Neer impingement sign", "Sinal de Neer"],
+      "categorias": ["Impacto subacromial"],
+      "posicaoPaciente": "Sentado ou em pé, braço relaxado ao lado do corpo.",
+      "execucao": "O examinador estabiliza a escápula com uma mão e, com a outra, eleva passivamente o braço em rotação interna no plano da escápula até o máximo.",
+      "resultadoPositivo": "Dor na face anterolateral do ombro durante a elevação.",
+      "observacoes": "Texto provisório para testar o app. Substituir pelo texto do autor.",
+      "propriedades": [],
+      "video": null
+    },
+    {
+      "slug": "teste-de-jobe",
+      "regiao": "ombro",
+      "nome": "Teste de Jobe",
+      "nomeEn": "Empty can test",
+      "sinonimos": ["Lata vazia", "Supraspinatus test"],
+      "categorias": ["Lesão do supraespinal", "Impacto subacromial"],
+      "posicaoPaciente": "Em pé ou sentado, braços a 90° de abdução no plano da escápula, rotação interna completa (polegares para baixo).",
+      "execucao": "O examinador aplica força para baixo nos dois braços ao mesmo tempo, e o paciente resiste.",
+      "resultadoPositivo": "Dor ou fraqueza do lado examinado em relação ao outro.",
+      "observacoes": "Texto provisório para testar o app. Substituir pelo texto do autor.",
+      "propriedades": [],
+      "video": null
+    },
+    {
+      "slug": "teste-de-apreensao-anterior",
+      "regiao": "ombro",
+      "nome": "Teste de apreensão anterior",
+      "nomeEn": "Anterior apprehension test",
+      "sinonimos": ["Apprehension test", "Apreensão"],
+      "categorias": ["Instabilidade anterior"],
+      "posicaoPaciente": "Decúbito dorsal, ombro na borda da maca, abdução de 90° e cotovelo fletido a 90°.",
+      "execucao": "O examinador leva o ombro em rotação externa progressiva, com cuidado.",
+      "resultadoPositivo": "Sensação de que o ombro vai sair do lugar (apreensão), não apenas dor.",
+      "observacoes": "Texto provisório para testar o app. Substituir pelo texto do autor.",
+      "propriedades": [],
+      "video": null
+    }
+  ],
+  "referencias": []
+}

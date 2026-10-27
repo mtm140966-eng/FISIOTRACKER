@@ -1,0 +1,29 @@
+{
+  "_sobre": "Só entra no app em modo de desenvolvimento. Números e referências INVENTADOS, para ver as telas com dados. Nunca publicar.",
+  "testes": [
+    {
+      "slug": "teste-de-demonstracao",
+      "regiao": "ombro",
+      "nome": "Teste de demonstração (dados fictícios)",
+      "nomeEn": "Demo test",
+      "sinonimos": ["Demonstração"],
+      "categorias": ["Exemplo"],
+      "posicaoPaciente": "Exemplo de texto de posição.",
+      "execucao": "Exemplo de texto de execução.",
+      "resultadoPositivo": "Exemplo de texto de resultado positivo.",
+      "observacoes": "Todos os números desta ficha são fictícios.",
+      "demonstracao": true,
+      "propriedades": [
+        { "id": "demo-1", "referenciaId": "demo-ref-1", "condicaoAlvo": "Condição de exemplo", "padraoOuro": "Padrão-ouro de exemplo", "populacao": "População de exemplo", "n": 100,
+          "sensibilidade": 0.8, "sensIc": [0.7, 0.88], "especificidade": 0.92, "espIc": [0.85, 0.96], "lrPositiva": null, "lrNegativa": null, "confiabilidade": 0.71, "confiabilidadeTipo": "kappa" },
+        { "id": "demo-2", "referenciaId": "demo-ref-2", "condicaoAlvo": "Condição de exemplo", "padraoOuro": "Outro padrão-ouro", "populacao": "Outra população", "n": 40,
+          "sensibilidade": 0.52, "sensIc": null, "especificidade": 0.7, "espIc": null, "lrPositiva": 1.7, "lrNegativa": 0.69, "confiabilidade": null, "confiabilidadeTipo": null }
+      ],
+      "video": null
+    }
+  ],
+  "referencias": [
+    { "id": "demo-ref-1", "citacao": "Autor A, Autor B. Referência fictícia de demonstração. Revista Exemplo. 2020;1(1):1-10.", "pmid": null, "doi": null, "ano": 2020 },
+    { "id": "demo-ref-2", "citacao": "Autor C. Outra referência fictícia. Revista Exemplo. 2018;2(3):20-30.", "pmid": null, "doi": null, "ano": 2018 }
+  ]
+}
