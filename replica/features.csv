@@ -1,26 +1,26 @@
 feature,area,priority,original,clone,notes
-Abrir sempre sem fechar (inclusive offline),estabilidade,must,no,no,principal reclamação do original
-Navegar pelas regiões no mapa do corpo,navegação,must,yes,no,figura própria
-Lista A–Z de todos os testes,navegação,must,yes,no,
-Busca por nome e epônimo com tolerância a grafia e acento,busca,must,yes,no,ex.: Neer/Neer's; Lachman/Lachmann
-Busca e nomes em português e em inglês,busca,must,no,no,diferencial para o Brasil
-Ficha do teste: posição; execução; o que é positivo,conteúdo,must,yes,no,texto próprio
-Vídeo de cada teste com áudio,conteúdo,must,partial,no,original não tem áudio no streaming
-Propriedades diagnósticas: Sens; Esp; LR+; LR−; confiabilidade,evidência,must,yes,no,levantadas dos artigos originais
-Referências com link para PubMed/DOI,evidência,must,yes,no,
-Favoritos,navegação,must,yes,no,
-Uso offline do texto e das propriedades,offline,must,partial,no,
-Funcionar em celular Android e iPhone,plataforma,must,yes,no,
+Abrir sempre sem fechar (inclusive offline),estabilidade,must,no,partial,principal reclamação do original; conteúdo embutido no app; abre sem rede. Falta o pacote baixado e trocado com segurança (/replica-backend)
+Navegar pelas regiões no mapa do corpo,navegação,must,yes,yes,figura própria; S03; figura provisória feita do zero
+Lista A–Z de todos os testes,navegação,must,yes,no,ainda não há tela A–Z; a busca cobre parte
+Busca por nome e epônimo com tolerância a grafia e acento,busca,must,yes,yes,ex.: Neer/Neer's; Lachman/Lachmann; S05; 7 testes automáticos
+Busca e nomes em português e em inglês,busca,must,no,partial,diferencial para o Brasil; nomes e busca em pt e en; interface só em pt
+Ficha do teste: posição; execução; o que é positivo,conteúdo,must,yes,yes,texto próprio; S06; textos provisórios até o autor escrever
+Vídeo de cada teste com áudio,conteúdo,must,partial,no,original não tem áudio no streaming; S07 só com estado vazio; player entra com os vídeos
+Propriedades diagnósticas: Sens; Esp; LR+; LR−; confiabilidade,evidência,must,yes,yes,levantadas dos artigos originais; S08; LR calculada marcada; selo por LR; 11 testes automáticos
+Referências com link para PubMed/DOI,evidência,must,yes,yes,S09
+Favoritos,navegação,must,yes,partial,"S10; só na memória, some ao fechar o app"
+Uso offline do texto e das propriedades,offline,must,partial,partial,pacote embutido; falta atualização baixada
+Funcionar em celular Android e iPhone,plataforma,must,yes,partial,"código Expo único; conferido só na versão web, falta abrir em aparelho"
 Painel para você cadastrar e editar testes sem programar,conteúdo,must,no,no,necessário porque o conteúdo é seu
-Busca por suspeita diagnóstica (categoria),navegação,should,yes,no,
+Busca por suspeita diagnóstica (categoria),navegação,should,yes,partial,a busca acha pela suspeita; falta a tela de categorias
 Vídeos offline incluídos sem cobrança extra,offline,should,partial,no,original cobra à parte
 Gerenciar downloads por região,offline,should,yes,no,
 Favoritos sincronizados entre aparelhos,conta,should,no,no,exige login
-Calculadora de probabilidade pós-teste a partir da LR,evidência,should,no,no,usa a probabilidade pré-teste informada pelo clínico
-Interface limpa e com fonte grande,design,should,no,no,reclamação do original
-Indicar quando os estudos discordam,evidência,should,unknown,no,
+Calculadora de probabilidade pós-teste a partir da LR,evidência,should,no,no,usa a probabilidade pré-teste informada pelo clínico; cálculo pronto e testado em src/lib; falta a tela
+Interface limpa e com fonte grande,design,should,no,yes,reclamação do original; tokens do /replica-design; contraste AA
+Indicar quando os estudos discordam,evidência,should,unknown,yes,S08
 Atualizações de conteúdo sem atualizar o app,conteúdo,should,unknown,no,
-Tema escuro,design,should,unknown,no,
+Tema escuro,design,should,unknown,partial,segue o sistema; falta a opção manual em Mais
 Modo quiz/revisão,estudo,could,no,no,reclamação do original; útil para residentes
 Sequência de exame por região (roteiro de consulta),clínico,could,no,no,
 Compartilhar o teste com um colega,compartilhamento,could,unknown,no,
