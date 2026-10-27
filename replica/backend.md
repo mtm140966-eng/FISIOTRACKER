@@ -43,7 +43,7 @@ clique em Publicar. O app baixa a versão na próxima abertura com internet.
 - `publicar_pacote()`: só editor; trava a tabela para duas publicações não pegarem a mesma versão; grava o JSON como texto e o sha256 desse texto.
 - `ultimo_pacote`: visão leve para o app saber se há versão nova.
 - Vídeos: bucket `videos`, leitura pública, escrita só de editor, até 50 MB, só mp4.
-- **Testes:** `supabase/testes/rodar.sh <banco vazio>` roda as migrações, o seed e 22 verificações (acesso de anônimo, clínico, segundo usuário e editor; publicação; sha256; vídeos; apagar conta). Rodado num Postgres 16 local com uma simulação mínima do Supabase: 22 de 22.
+- **Testes:** `supabase/testes/rodar.sh <banco vazio>` roda as migrações, o seed e 25 verificações (acesso de anônimo, clínico, segundo usuário e editor; publicação; sha256; vídeos; apagar conta). Rodado num Postgres 16 local com uma simulação mínima do Supabase: 25 de 25.
 
 ## App
 
